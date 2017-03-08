@@ -1,0 +1,30 @@
+.full-height { height: 100%; }
+
+.full-width { width: 100%; }
+a.full-width, input[type=submit].full-width { display: block; text-align: center; }
+
+.interactable { cursor: pointer }
+
+@for $i from 0 through 4 {
+    .margin-#{$i} { margin: #{$i}em; }
+    
+    .margin-b#{$i} { margin-bottom: #{$i}em; }
+    .margin-l#{$i} { margin-left: #{$i}em; }
+    .margin-r#{$i} { margin-right: #{$i}em; }
+    .margin-t#{$i} { margin-top: #{$i}em; }
+    
+    .margin-bt#{$i} { margin-bottom: #{$i}em; margin-top: #{$i}em; }
+    .margin-lr#{$i} { margin-left: #{$i}em; margin-right: #{$i}em; }
+
+    .padding-#{$i} { padding: #{$i}em; }
+    
+    .padding-b#{$i} { padding-bottom: #{$i}em; }
+    .padding-l#{$i} { padding-left: #{$i}em; }
+    .padding-r#{$i} { padding-right: #{$i}em; }
+    .padding-t#{$i} { padding-top: #{$i}em; }
+    
+    .padding-bt#{$i} { padding-bottom: #{$i}em; padding-top: #{$i}em; }
+    .padding-lr#{$i} { padding-left: #{$i}em; padding-right: #{$i}em; }
+}
+
+.stripped { margin: 0; padding: 0; }

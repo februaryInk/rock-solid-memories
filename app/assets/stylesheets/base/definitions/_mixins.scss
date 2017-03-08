@@ -1,0 +1,91 @@
+@mixin clearfix {
+    &:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+
+@mixin faux-table {
+    border-collapse: collapse;
+    display: table;
+    
+    & > * {
+        display: table-row;
+        width: 100%;
+        
+        & > * {
+            display: table-cell;
+        }
+    }
+}
+
+@mixin overflow-clear {
+    display: block;
+    overflow: hidden;
+    zoom: 1;
+}
+
+@mixin text-family {
+    font-family: sans-serif;
+}
+
+@mixin heading-family {
+    font-family: serif;
+}
+
+@mixin signature-family {
+    font-family: cursive;
+}
+
+@mixin translucent-color( $alpha, $color ) {
+    position: relative;
+    
+    &::before {
+        background-color: $color;
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: $alpha;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+    }
+    
+    * {
+        position: relative;
+        z-index: 200;
+    }
+}
+
+@mixin translucent-image( $alpha, $image ) {
+    position: relative;
+    
+    &::before {
+        background-image: image-url( $image );
+        background-repeat: both;
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: $alpha;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+    }
+    
+    & > * {
+        position: relative;
+        z-index: 200;
+    }
+}
+
+@mixin vertically-center {
+    &::before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+}

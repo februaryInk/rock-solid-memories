@@ -1,0 +1,101 @@
+h1 {
+    color: #0a4774;
+    font-family: serif;
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 36px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+p {
+    color: #444444;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 10px;
+}
+
+.blue {
+    background-color: #0a4774;
+    color: #ffffff;
+}
+
+.body {
+    background-color: #ffffff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.button {
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 18px;
+    margin: 0 auto;
+    padding: 12px 20px;
+    text-decoration: none !important;
+    user-select: none;
+}
+
+.button.-bright {
+    background-color: #d15a00;
+    color: #ffffff;
+}
+
+.buttons {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.centered {
+    text-align: center;
+}
+
+.container {
+    background-color: #ffffff;
+    margin: 0 auto;
+    width: 580px;
+}
+
+.container td {
+    padding: 32px 0;
+}
+
+.footer {
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    width: 580px;
+}
+
+.header {
+    margin: 0 auto;
+    width: 580px;
+}
+
+.license {
+    font-size: 12px;
+    padding-top: 20px;
+}
+
+.logo {
+    display: block;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.panel {
+    height: 24px;
+}
+
+.underlined {
+    text-decoration: underline;
+}

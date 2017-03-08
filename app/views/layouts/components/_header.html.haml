@@ -1,0 +1,36 @@
+%header.header
+  .header__upper
+    .grid-container.full-height
+      .grid-100.full-height
+        %table.header__title
+          %tbody
+            %tr
+              %td
+                %h1.heading.-grand.-signature.margin-b0
+                  = business_name
+        .header__phone
+          %span.fa.fa-phone
+          %span
+            = business_phone_number
+  .header__lower
+    .grid-container
+      .grid-100
+        .header__slogan
+          %h2.heading.-small.margin-b0
+            = business_motto
+        .header__nav__toggle
+          %span.header__nav__link.js-nav-toggle{ 'data-target' => '.header__nav__links' }
+            %span.fa.fa-bars
+        %ul.header__nav__links
+          %li
+            = link_to root_path, class: 'header__nav__link js-openable-link' do
+              %span
+                Home
+          %li
+            = link_to about_path, class: 'header__nav__link js-openable-link' do
+              %span
+                About
+          %li
+            = link_to new_email_path, class: 'header__nav__link js-openable-link' do
+              %span
+                Contact Us

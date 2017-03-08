@@ -1,0 +1,29 @@
+.page-content
+  %section
+    .grid-container
+      .grid-15
+        %br
+      .grid-70.grid-parent
+        .grid-100
+          %h1.heading.-large
+            Contact Us
+        = form_for @email, :url => new_email_path do | f |
+          .grid-50.field
+            = f.label :name, class: 'required'
+            = f.text_field :name
+            = f.error_message :name
+          .grid-50.field
+            = f.label :return_email_address, 'Email Address', class: 'required'
+            = f.text_field :return_email_address
+            = f.error_message :return_email_address
+          .grid-100
+            .field
+              = f.label :subject
+              = f.text_field :subject
+              = f.error_message :subject
+            .field
+              = f.label :content, 'Message', class: 'required'
+              = f.text_area :content
+              = f.error_message :content
+            .centered
+              = f.submit 'Submit', class: 'button -bright -large'

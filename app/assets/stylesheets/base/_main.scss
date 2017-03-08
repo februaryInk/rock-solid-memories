@@ -1,0 +1,30 @@
+@import 'base/definitions/variables';
+@import 'base/definitions/mixins';
+
+@import 'base/buttons_and_links';
+@import 'base/flash';
+@import 'base/footer';
+@import 'base/forms_and_inputs';
+@import 'base/header';
+@import 'base/layout_elements';
+@import 'base/logo';
+@import 'base/tables';
+@import 'base/typography';
+@import 'base/utility_bar';
+
+@import 'base/global_modifiers';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100%;
+}
+
+html {
+    height: 100%;
+}

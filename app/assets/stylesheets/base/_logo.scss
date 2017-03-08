@@ -1,0 +1,20 @@
+.logo {
+  background-image: image-url( 'logo.png' );
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+  height: 125px;
+  vertical-align: middle;
+  width: 131px;
+  
+  &.-large {
+    background-image: image-url( 'logo-large.png' );
+    height: 500px;
+    width: 524px;
+  }
+  
+  &.-small {
+    height: 83px;
+    width: 87px;
+  }
+}

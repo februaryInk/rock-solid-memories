@@ -1,0 +1,7 @@
+#flash-container
+  - flash.each do | message_type, message |
+    - if %W[ alert danger info notice success warning ].include? message_type
+      %section.padding-bt2
+        .grid-container
+          .grid-100
+            = content_tag :div, sanitize( message ), class: "flash -#{message_type}"

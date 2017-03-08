@@ -1,0 +1,9 @@
+.align-baseline { vertical-align: baseline; }
+.align-middle { vertical-align: middle; }
+.align-top { vertical-align: top; }
+.fitted { text-align: center; white-space: nowrap; }
+.maximized { width: 99%; }
+
+.faux-table {
+    @include faux-table;
+}

@@ -1,0 +1,21 @@
+!!! 5
+%html{ :lang => 'en' }
+  %head
+    %meta{ :charset => 'utf-8' }
+    %meta{ :name => 'viewport', :content => 'width=device-width, initial-scale=1.0' }
+    %meta{ :name => 'google-site-verification', :content => '' }
+    %meta{ :name => 'description', :content => '' }
+    %title
+      = content_for?( :title ) ? yield( :title ) : business_name
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tag
+  %body
+    #page-wrapper
+      = yield( :header ) if content_for?( :header )
+      = yield( :utility_bar ) if content_for?( :utility_bar )
+      = yield( :flash_bar ) if content_for?( :flash_bar )
+      = yield
+    = yield( :footer ) if content_for?( :footer )
+    = yield( :javascript ) if content_for?( :javascript )
+    -# console if Rails.env.development?

@@ -1,0 +1,27 @@
+.flash {
+    background-color: $onahau;
+    border: 1px solid $shakespeare;
+    border-radius: 0.5em;
+    color: $shakespeare;
+    margin-bottom: 0.75em;
+    margin-top: 0.75em;
+    padding: 1em;
+
+    &.-danger {
+        background-color: $pale-rose;
+        border-color: $lotus;
+        color: $lotus;
+    }
+
+    &.-success {
+        background-color: $peppermint;
+        border-color: $glade-green;
+        color: $glade-green;
+    }
+
+    &.-warning {
+        background-color: $corn-silk;
+        border-color: $sandrift;
+        color: $sandrift;
+    }
+}

@@ -1,0 +1,26 @@
+%head
+  = stylesheet_link_tag 'mailer.css'
+%body
+  %table.body
+    %tbody
+      %tr
+        %td
+          %table.header
+            %tbody
+              %tr
+                %td
+                  .panel
+                  %h1.centered
+                    = business_name
+                  .panel
+          %table.container
+            %tbody
+              %tr
+                %td
+                  = yield
+          %table.footer
+            %tbody
+              %tr
+                %td
+                  %p.license
+                    &copy #{Time.now.year} All Rights Reserved

@@ -1,0 +1,74 @@
+form {
+    label {
+        font-size: 0.75em;
+        font-weight: bold;
+        text-indent: 0.5em;
+        text-transform: uppercase;
+    }
+}
+
+select:not( [ multiple ] ) {
+    appearance: none;
+    
+    option {
+        padding: 0.25em !important;
+    }
+    
+    &::-ms-expand {
+        display: none;
+    }
+}
+
+select,
+textarea,
+input[ type='date' ],
+input[ type='email' ],
+input[ type='password' ],
+input[ type='text' ] {
+    border: 1px solid gray;
+    border-radius: 0.25em;
+    height: 2.25em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    width: 100%;
+    
+    &.field-error {
+        border: 1px solid lighten( $lotus, 15% );
+    }
+}
+
+select[ multiple ] {
+    appearance: none;
+    background-color: $white;
+    height: 10em;
+    
+    option {
+        padding: 0.25em !important;
+    }
+}
+
+textarea {
+    height: 15em;
+}
+
+.error-message {
+    color: $sea-pink;
+    font-weight: bolder;
+    line-height: 1em;
+    margin: 0;
+    padding: 0.25em 0 0;
+}
+
+.field {
+    margin-bottom: 1em;
+}
+
+.partitioned-fields {
+    border: none;
+    margin-bottom: 1em;
+    padding: 1em;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 100px $white inset;
+}

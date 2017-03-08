@@ -1,0 +1,94 @@
+a {
+    font-size: 18px;
+    text-decoration: none;
+}
+
+body {
+    @include text-family;
+    
+    color: $color-text;
+}
+
+h1, h2, h3, h4, h5, h6 { margin-top: 0; margin-bottom: 16px; }
+
+label {
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 0.6em;
+    padding-bottom: 4px;
+    text-transform: uppercase;
+}
+
+p {
+    font-size: 1.25em;
+    line-height: 1.75em;
+    margin-bottom: 1em;
+    margin-top: 0;
+}
+
+ul {
+    margin-top: 0;
+}
+
+b, strong { font-weight: bold; }
+em, i { font-style: italic; }
+
+.align-center { text-align: center; }
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+
+.bulleted {
+    display: block;
+    font-size: 18px;
+    line-height: 1.5em;
+    list-style: disc outside none;
+    padding-left: 1em;
+}
+
+.align-right { text-align: right; }
+.centered { text-align: center; }
+
+.heading { 
+    @include heading-family;
+    
+    font-weight: bold;
+    
+    &.-small { font-size: 1.75em; }
+    &.-medium { font-size: 2em; }
+    &.-large { font-size: 2.5em; }
+    &.-grand { font-size: 3em; }
+    &.-giant { font-size: 4em; }
+    
+    &.-signature { @include signature-family; font-weight: bold; }
+}
+
+.nowrap { white-space: nowrap; }
+
+.t-small { font-size: 16px; }
+.t-medium { font-size: 18px; }
+.t-large { font-size: 20px; }
+.t-grand { font-size: 24px; }
+.t-giant { font-size: 48px; }
+
+.t-empty {
+    background-color: $white-smoke;
+    border: 1px dashed $nobel;
+    color: $nobel;
+    padding: 1em;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.t-white { color: $white; }
+
+a, span { &.underlined { text-decoration: underline; } }
+h1, h2, h3, h4, h5, h6 { 
+    font-weight: 400;
+    
+    &.underlined { 
+        border-bottom: 1px solid $color-text;
+        padding-bottom: 4px; 
+        width: 100%; 
+    } 
+}

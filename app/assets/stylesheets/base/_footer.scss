@@ -1,0 +1,48 @@
+.footer {
+    color: $white;
+    width: 100%;
+}
+
+.footer__link {
+    border-bottom: 2px solid transparent;
+    color: $white;
+    
+    &:hover {
+        border-color: $white;
+    }
+}
+
+.footer__main {
+    @include translucent-image( 0.40, 'shadow.png' );
+    
+    background-color: $dark-cerulean;
+    border-top: 1px solid lighten( $dark-cerulean, 2% );
+    padding: 2em 0;
+}
+
+.footer__nav {
+    @include clearfix;
+    
+    color: $white;
+    
+    li {
+        float: left;
+        margin-left: 2em;
+    }
+    
+    ul {
+        @include clearfix;
+        
+        float: right;
+        list-style: none;
+    }
+}
+
+.footer__pre {
+    @include translucent-image( 0.50, 'shadow.png' );
+    
+    background-color: darken( $dark-cerulean, 5% );
+    border-bottom: 1px solid darken( $dark-cerulean, 10% );
+    border-top: 1px solid darken( $dark-cerulean, 7% );
+    padding: 1em 0;
+}
