@@ -3,7 +3,10 @@
 .full-width { width: 100%; }
 a.full-width, input[type=submit].full-width { display: block; text-align: center; }
 
+.inline-block { display: inline-block; }
 .interactable { cursor: pointer }
+
+.padding-half { padding: 0.5em; }
 
 @for $i from 0 through 4 {
     .margin-#{$i} { margin: #{$i}em; }
@@ -28,3 +31,39 @@ a.full-width, input[type=submit].full-width { display: block; text-align: center
 }
 
 .stripped { margin: 0; padding: 0; }
+
+.fadeout-border {
+    border: 0px solid transparent;
+    
+    &.-horizontal {
+        border-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, $white 25%, $white 75%, rgba(0, 0, 0, 0) 100%);
+        border-image-slice: 1;
+    }
+    
+    &.-vertical {
+        border-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, $white 25%, $white 75%, rgba(0, 0, 0, 0) 100%);
+        border-image-slice: 1;
+    }
+    
+    &.-bottom {
+        border-bottom-width: 1px;
+    }
+    
+    &.-left {
+        border-left-width: 1px;
+    }
+    
+    &.-right {
+        border-right-width: 1px;
+    }
+    
+    &.-top {
+        border-top-width: 1px;
+    }
+}
+
+.top-to-bottom {
+    border: 1px solid transparent;
+    border-image: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, $white 25%, $white 25%, rgba(0, 0, 0, 0) 100%);
+    border-image-slice: 1;
+}

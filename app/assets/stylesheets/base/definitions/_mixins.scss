@@ -27,15 +27,16 @@
 }
 
 @mixin text-family {
-    font-family: sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 @mixin heading-family {
-    font-family: serif;
+    font-family: 'Source Sans Pro';
+    font-weight: 200;
 }
 
 @mixin signature-family {
-    font-family: cursive;
+    font-family: Geared, Impact, serif;
 }
 
 @mixin translucent-color( $alpha, $color ) {

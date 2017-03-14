@@ -1,9 +1,9 @@
 module ApplicationHelper
   include FormsHelper
   
-  # Business motto.
-  def business_motto
-    'Stone engraving for the memories you\'ll never forget.'
+  # Business slogan.
+  def business_slogan
+    'Engraving for the memories you\'ll never forget.'
   end
   
   # Business name.

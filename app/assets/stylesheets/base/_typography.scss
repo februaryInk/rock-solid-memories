@@ -52,15 +52,14 @@ em, i { font-style: italic; }
 .heading { 
     @include heading-family;
     
-    font-weight: bold;
-    
     &.-small { font-size: 1.75em; }
     &.-medium { font-size: 2em; }
-    &.-large { font-size: 2.5em; }
-    &.-grand { font-size: 3em; }
-    &.-giant { font-size: 4em; }
+    &.-large { font-size: 3em; }
+    &.-grand { font-size: 5em; }
+    &.-giant { font-size: 7em; }
     
     &.-signature { @include signature-family; font-weight: bold; }
+    &.-weighted { font-weight: 400; }
 }
 
 .nowrap { white-space: nowrap; }

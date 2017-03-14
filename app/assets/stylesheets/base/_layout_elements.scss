@@ -12,47 +12,19 @@ section {
     padding: 6.5em 0;
     width: 100%;
     
-    &.-bikers {
-        background-image:  image-url( 'bikers.jpg' );
-    }
-
-    &.-community {
-        background-image: image-url( 'community.jpg' );
-        
-        @media ( max-width: $media-mobile-max ) {
-            background-image: image-url( 'community-mobile.jpg' );
-        }
-
-        @media ( min-width: $media-4k-min ) {
-            background-image: image-url( 'community-4k.jpg' );
-        }
-    }
-
-    &.-country-road {
-        @include translucent-image( 0.75, 'country-road.jpg' );
+    &.-black {
+        background-color: black;
     }
     
-    &.-family {
-        background-image: image-url( 'family.jpg' );
+    &.-stones {
+        @include translucent-image( 0.50, 'stones.jpg' );
         
         @media ( max-width: $media-mobile-max ) {
-            background-image: image-url( 'family-mobile.jpg' );
+            background-image: image-url( 'stones.jpg' );
         }
 
         @media ( min-width: $media-4k-min ) {
-            background-image: image-url( 'family-4k.jpg' );
-        }
-    }
-    
-    &.-seniors {
-        background-image: image-url( 'seniors.jpeg' );
-        
-        @media ( max-width: $media-mobile-max ) {
-            background-image: image-url( 'seniors-mobile.jpg' );
-        }
-
-        @media ( min-width: $media-4k-min ) {
-            background-image: image-url( 'seniors-4k.jpg' );
+            background-image: image-url( 'stones.jpg' );
         }
     }
 }
