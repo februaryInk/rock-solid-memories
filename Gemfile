@@ -6,6 +6,9 @@ gem 'rails', '~> 5.X'
 # Add browser-specific CSS prefixes automatically.
 gem 'autoprefixer-rails'
 
+# Load environment variables from .env.
+gem 'dotenv-rails'
+
 # Import the Font Awesome icons.
 gem 'font-awesome-rails'
 
@@ -23,6 +26,9 @@ gem 'pg', '0.18.4'
 
 # Use stylesheets to style emails rather than having to write everything inline.
 gem 'premailer-rails'
+
+# Use the web server Puma.
+gem 'puma'
 
 # Use SCSS for stylesheets.
 gem 'sass-rails', '~> 5.0'
@@ -42,9 +48,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console.
   gem 'byebug', :platform => :mri
   
-  # Load environment variables from .env.
-  gem 'dotenv-rails'
-  
   # Listen to file modifications.
   gem 'listen', '~> 3.0.5'
 end
@@ -52,6 +55,13 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
+  
+  # Handle automated deployment with Capistrano.
+  gem 'capistrano', :require => false
+  gem 'capistrano-bundler', :require => false
+  gem 'capistrano-rails', :require => false
+  gem 'capistrano-rvm', :require => false
+  gem 'capistrano3-puma', :require => false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.

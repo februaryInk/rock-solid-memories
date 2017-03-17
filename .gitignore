@@ -1,6 +1,7 @@
 # Bundler configuration files.
 # dotenv environment variables.
 # Commit message text file.
+# Database config file.
 # Rails documentation files.
 # Log files.
 # Project-related storage.
@@ -9,6 +10,7 @@
 /.bundle
 /.env
 /commit-message.txt
+/config/database.yml
 /doc/
 /log/*.log
 /storage
