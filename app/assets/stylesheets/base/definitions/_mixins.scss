@@ -65,6 +65,30 @@
     
     &::before {
         background-image: image-url( $image );
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        bottom: 0;
+        content: '';
+        left: 0;
+        opacity: $alpha;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 0;
+    }
+    
+    & > * {
+        position: relative;
+        z-index: 200;
+    }
+}
+
+@mixin translucent-repeating-image( $alpha, $image ) {
+    position: relative;
+    
+    &::before {
+        background-image: image-url( $image );
         background-repeat: both;
         bottom: 0;
         content: '';

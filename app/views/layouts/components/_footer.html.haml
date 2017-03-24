@@ -1,22 +1,2 @@
 %footer.footer
-  .footer__pre
-    .grid-container
-      .grid-100
-  .footer__main
-    .grid-container
-      .grid-50
-        %p.heading.-signature.-medium
-          = business_name
-        %p.t-small
-          %span.fa.fa-phone
-          = business_phone_number
-      .align-right.grid-50
-        %nav.footer__nav
-          %ul
-            %li
-              = link_to 'Home', root_path, class: 'footer__link'
-            %li
-              = link_to 'About', about_path, class: 'footer__link'
-        %p.t-small
-          &copy
-          = Date.today.year
+  

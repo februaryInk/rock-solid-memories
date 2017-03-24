@@ -1,0 +1,29 @@
+.accent {
+    border-radius: 1.125em;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1em;
+    padding: 0.25em;
+    position: relative;
+    text-transform: uppercase;
+    white-space: nowrap;
+    
+    &.-bright {
+        background-color: $bright;
+        color: $subtle;
+        padding-left: 0.625em;
+        padding-right: 0.625em;
+    }
+    
+    &.-large {
+        font-size: 16px;
+        padding-bottom: 0.5em;
+        padding-top: 0.5em;
+    }
+    
+    &.-subtle {
+        background-color: $subtle;
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+}

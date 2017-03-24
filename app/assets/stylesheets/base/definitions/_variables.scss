@@ -1,18 +1,12 @@
 // Color names from Color Name & Hue tool 
 // (http://www.color-blindness.com/color-name-hue/).
 
-$black: #000000;
-$charcoal: #444444;
 $corn-silk: #fff7e2;
 $crusta: #f0764f;
-$dark-cerulean: #0a4774;
 $glade-green: #577c53;
 $keppel: #3294aa;
 $linen: #fcf5ef;
 $lotus: #905650;
-$maximum-blue: #3bb1cc;
-$maximum-green: #679436;
-$nobel: #999999;
 $onahau: #d9edf6;
 $pale-rose: #f2dedf;
 $pattens-blue: #e4edf5;
@@ -20,13 +14,19 @@ $peppermint: #d6e8d2;
 $sandrift: #b29970;
 $sea-pink: #f09090;
 $shakespeare: #6298b4;
-$tawny: #d15a00;
+
+$black: #000000;
+$burnham: #23443f;
+$ice-cold: #b9e7dd;
+$racing-green: #192420;
+$tenne: #c74900;
 $white: #ffffff;
-$white-smoke: #f5f5f5;
+$wild-sand: #edeae5;
 
-$color-text: #555555;
+$color-text: $racing-green;
 
-// 336d99
-// 145a8f
-// 05375e
-// 022642
+$bright: $tenne;
+$dark: $burnham;
+$light: $ice-cold;
+$subtle: $wild-sand;
+$text: $racing-green;

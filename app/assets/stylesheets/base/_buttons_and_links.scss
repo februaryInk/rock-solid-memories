@@ -14,28 +14,28 @@
     white-space: nowrap;
     
     &.-bright {
-        background-color: $tawny;
+        background-color: $bright;
         color: $white;
         padding-left: 1.75em;
         padding-right: 1.75em;
         
         &.-inverse {
             background-color: $white;
-            border: 1px solid $tawny;
-            color: $tawny;
+            border: 1px solid $bright;
+            color: $bright;
         }
     }
     
     &.-dark {
-        background-color: $dark-cerulean;
+        background-color: $dark;
         color: $white;
         padding-left: 1.5em;
         padding-right: 1.5em;
         
         &.-inverse {
             background-color: $white;
-            border: 1px solid $dark-cerulean;
-            color: $dark-cerulean;
+            border: 1px solid $dark;
+            color: $dark;
         }
     }
     

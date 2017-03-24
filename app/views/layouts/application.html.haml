@@ -12,7 +12,10 @@
     = csrf_meta_tag
   %body
     #page-wrapper
-      = yield( :header ) if content_for?( :header )
+      - if content_for?( :header ) || content_for?( :sub_header )
+        %header.header
+          = yield( :header ) if content_for?( :header )
+          = yield( :sub_header ) if content_for?( :sub_header )
       = yield( :utility_bar ) if content_for?( :utility_bar )
       = yield( :flash_bar ) if content_for?( :flash_bar )
       = yield

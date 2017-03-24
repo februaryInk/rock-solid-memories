@@ -6,6 +6,7 @@ a.full-width, input[type=submit].full-width { display: block; text-align: center
 .inline-block { display: inline-block; }
 .interactable { cursor: pointer }
 
+.margin-lr-half { margin-left: 0.5em; margin-right: 0.5em; }
 .padding-half { padding: 0.5em; }
 
 @for $i from 0 through 4 {

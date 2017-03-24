@@ -71,14 +71,17 @@ em, i { font-style: italic; }
 .t-giant { font-size: 48px; }
 
 .t-empty {
-    background-color: $white-smoke;
-    border: 1px dashed $nobel;
-    color: $nobel;
+    background-color: $subtle;
+    border: 1px dashed darken( $subtle, 25% );
+    color: darken( $subtle, 25% );
     padding: 1em;
     text-align: center;
     text-transform: uppercase;
 }
 
+.t-bright { color: $bright; }
+.t-light { color: $light; }
+.t-subtle { color: $subtle; }
 .t-white { color: $white; }
 
 a, span { &.underlined { text-decoration: underline; } }
@@ -86,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     
     &.underlined { 
-        border-bottom: 1px solid $color-text;
+        border-bottom: 1px solid $text;
         padding-bottom: 4px; 
         width: 100%; 
     } 

@@ -33,22 +33,6 @@ section {
     @include translucent-image( 0.20, 'herringbone.svg' );
 }
 
-.color {
-    width: 100%;
-    
-    &.-dark-cerulean {
-        background-color: $dark-cerulean;
-    }
-    
-    &.-linen {
-        background-color: $linen;
-    }
-    
-    &.-translucent-white {
-        @include translucent-color( 0.60, $white );
-    }
-}
-
 .expandable {
     cursor: pointer;
     
@@ -102,9 +86,12 @@ section {
 
 .panel {
     background-color: $white;
-    border-radius: 0.25em;
-    margin-bottom: 1em;
     padding: 1em;
+    
+    &.-dark {
+        background-color: $dark;
+        color: $white;
+    }
 }
 
 #map-canvas {
