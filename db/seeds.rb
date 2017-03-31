@@ -13,3 +13,7 @@ if File.exist?( Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb" ) )
     puts e.backtrace
   end
 end
+
+
+Spree::Core::Engine.load_seed if defined?(Spree::Core)
+Spree::Auth::Engine.load_seed if defined?(Spree::Auth)

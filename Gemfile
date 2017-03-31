@@ -1,10 +1,12 @@
 source 'https://rubygems.org'
 
 # The essential Rails gem.
-gem 'rails', '~> 5.X'
+gem 'rails', '5.0.1'
 
 # Add browser-specific CSS prefixes automatically.
 gem 'autoprefixer-rails'
+
+gem 'coffee-script'
 
 # Load environment variables from .env.
 gem 'dotenv-rails'
@@ -32,6 +34,10 @@ gem 'puma'
 
 # Use SCSS for stylesheets.
 gem 'sass-rails', '~> 5.0'
+
+gem 'spree', '~> 3.2.0'
+gem 'spree_auth_devise', '~> 3.2.0.beta'
+gem 'spree_gateway', '~> 3.2.0.beta'
 
 # Make navigating the application faster.
 gem 'turbolinks', '~> 5.x'
