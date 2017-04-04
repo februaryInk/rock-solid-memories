@@ -6,6 +6,9 @@ gem 'rails', '5.0.1'
 # Add browser-specific CSS prefixes automatically.
 gem 'autoprefixer-rails'
 
+# Pretty print structures in the console using `ap`.
+gem 'awesome_print'
+
 gem 'coffee-script'
 
 # Load environment variables from .env.
@@ -35,7 +38,7 @@ gem 'puma'
 # Use SCSS for stylesheets.
 gem 'sass-rails', '~> 5.0'
 
-gem 'spree', '~> 3.2.0'
+gem 'spree', :path => '/home/farrah/Rails/spree_custom/'
 gem 'spree_auth_devise', '~> 3.2.0.beta'
 gem 'spree_gateway', '~> 3.2.0.beta'
 
