@@ -14,6 +14,11 @@ if File.exist?( Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb" ) )
   end
 end
 
-
-Spree::Core::Engine.load_seed if defined?(Spree::Core)
-Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+if ENV[ 'SEED_SPREE' ]
+  begin
+    Spree::Core::Engine.load_seed if defined?(Spree::Core)
+    Spree::Auth::Engine.load_seed if defined?(Spree::Auth)
+  rescue StandardError => e
+    puts 'Spree seeds were not run successfully. Perhaps they are already in the database?'
+  end
+end
