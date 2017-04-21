@@ -38,7 +38,7 @@ gem 'puma'
 # Use SCSS for stylesheets.
 gem 'sass-rails', '~> 5.0'
 
-gem 'spree', :path => '/home/farrah/Rails/spree_custom/'
+gem 'spree', :path => '/home/farrah/Rails/spree_custom/', :branch => '3-2-stable-custom'
 gem 'spree_auth_devise', '~> 3.2.0.beta'
 gem 'spree_gateway', '~> 3.2.0.beta'
 
