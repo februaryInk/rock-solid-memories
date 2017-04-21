@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170331001167) do
+ActiveRecord::Schema.define(version: 20170421014142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,6 +139,34 @@ ActiveRecord::Schema.define(version: 20170331001167) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "spree_customization_values", force: :cascade do |t|
+    t.integer  "customization_id"
+    t.integer  "position"
+    t.string   "name"
+    t.string   "presentation"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["customization_id"], name: "index_spree_customization_values_on_customization_id", using: :btree
+  end
+
+  create_table "spree_customization_variants", force: :cascade do |t|
+    t.integer  "customization_id"
+    t.integer  "variant_id"
+    t.integer  "position"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["customization_id"], name: "index_spree_customization_variants_on_customization_id", using: :btree
+    t.index ["variant_id"], name: "index_spree_customization_variants_on_variant_id", using: :btree
+  end
+
+  create_table "spree_customizations", force: :cascade do |t|
+    t.string   "name"
+    t.string   "presentation"
+    t.string   "value_type"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "spree_gateways", force: :cascade do |t|
     t.string   "type"
     t.string   "name"
@@ -186,6 +214,7 @@ ActiveRecord::Schema.define(version: 20170331001167) do
     t.decimal  "pre_tax_amount",               precision: 12, scale: 4, default: "0.0", null: false
     t.decimal  "taxable_adjustment_total",     precision: 10, scale: 2, default: "0.0", null: false
     t.decimal  "non_taxable_adjustment_total", precision: 10, scale: 2, default: "0.0", null: false
+    t.text     "customizations"
     t.index ["order_id"], name: "index_spree_line_items_on_order_id", using: :btree
     t.index ["tax_category_id"], name: "index_spree_line_items_on_tax_category_id", using: :btree
     t.index ["variant_id"], name: "index_spree_line_items_on_variant_id", using: :btree
@@ -1037,4 +1066,7 @@ ActiveRecord::Schema.define(version: 20170331001167) do
     t.index ["kind"], name: "index_spree_zones_on_kind", using: :btree
   end
 
+  add_foreign_key "spree_customization_values", "spree_customizations", column: "customization_id"
+  add_foreign_key "spree_customization_variants", "spree_customizations", column: "customization_id"
+  add_foreign_key "spree_customization_variants", "spree_variants", column: "variant_id"
 end

@@ -17,7 +17,7 @@ def self.match_ids( id_set, i, matched_ids, product )
           p.assign_attributes(
             :amount => [
               product.master.price,
-              rock_image_value_prices[ o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-image' ).id ).first.name ],
+              rock_image_value_prices[ o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id ).first.name ],
               rock_size_value_prices[ o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).first.name ]
             ].sum,
             :currency => 'USD'
@@ -35,8 +35,8 @@ end
 
 def self.rock_image_value_prices
   { 
-    'True' => 25.00, 
-    'False' => 0.00 
+    'Catalog' => 25.00, 
+    'None' => 0.00 
   }
 end
 
@@ -49,16 +49,27 @@ def self.rock_size_value_prices
   }
 end
 
+puts 'Creating ShippingCategories...'
+
+shipping_categories = [
+  {
+    :name => 'Rock'
+  }
+]
+
+shipping_categories.each do | shipping_category |
+  Spree::ShippingCategory.find_or_initialize_by( :name => shipping_category[ :name ] ).tap do | o |
+    o.assign_attributes( shipping_category )
+    o.save
+  end
+end
+
 puts 'Creating Option Types...'
 
 option_types = [
   {
-    :name => 'rock-font',
-    :presentation => 'Font'
-  },
-  {
-    :name => 'rock-image',
-    :presentation => 'Image?'
+    :name => 'rock-image-type',
+    :presentation => 'Image Type'
   },
   {
     :name => 'rock-size',
@@ -77,35 +88,18 @@ end
 
 puts 'Creating Option Values...'
 
-font_names = [
-  'Arial',
-  'Georgia',
-  'Tahoma'
-]
-
-option_values = [  ]
-
-font_names.each_with_index do | font_name, i |
-  option_values << {
-    :option_type_id => Spree::OptionType.find_by( :name => 'rock-font' ).id,
-    :name => font_name,
-    :position => i + 1,
-    :presentation => font_name
-  }
-end
-
-option_values = option_values.concat( [
+option_values = [
   {
-    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image' ).id,
-    :name => 'True',
+    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id,
+    :name => 'None',
     :position => 1,
-    :presentation => 'Yes'
+    :presentation => 'None'
   },
   {
-    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image' ).id,
-    :name => 'False',
+    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id,
+    :name => 'Catalog',
     :position => 2,
-    :presentation => 'No'
+    :presentation => 'Catalog'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
@@ -131,13 +125,86 @@ option_values = option_values.concat( [
     :position => 4,
     :presentation => 'Extra Large'
   }
-] )
+]
 
 rock_option_values = [  ]
 
 option_values.each do | option_value |
   rock_option_values << Spree::OptionValue.find_or_initialize_by( :name => option_value[ :name ] ).tap do | o |
     o.assign_attributes( option_value )
+    o.save
+  end
+end
+
+puts 'Creating Customizations...'
+
+customizations = [
+  {
+    :name => 'font',
+    :presentation => 'Font',
+    :value_type => 'select'
+  },
+  {
+    :name => 'catalog-artwork',
+    :presentation => 'Image Catalog Code',
+    :value_type => 'string'
+  },
+  {
+    :name => 'text-line-1',
+    :presentation => 'Text Line 1',
+    :value_type => 'string'
+  },
+  {
+    :name => 'text-line-2',
+    :presentation => 'Text Line 2',
+    :value_type => 'string'
+  },
+  {
+    :name => 'text-line-3',
+    :presentation => 'Text Line 3',
+    :value_type => 'string'
+  },
+  {
+    :name => 'text-line-4',
+    :presentation => 'Text Line 4',
+    :value_type => 'string'
+  },
+  {
+    :name => 'notes',
+    :presentation => 'Additional Notes',
+    :value_type => 'text'
+  }
+]
+
+customizations.each do |customization|
+  Spree::Customization.find_or_initialize_by( :name => customization[ :name ] ).tap do | o |
+    o.assign_attributes( customization )
+    o.save
+  end
+end
+
+puts 'Creating CustomizatonValues...'
+
+font_names = [
+  'Arial',
+  'Georgia',
+  'Tahoma'
+]
+
+customization_values = [  ]
+
+font_names.each_with_index do | font_name, i |
+  customization_values << {
+    :customization_id => Spree::Customization.find_by( :name => 'font' ).id,
+    :name => font_name,
+    :position => i + 1,
+    :presentation => font_name
+  }
+end
+
+customization_values.each do | customization_value |
+  Spree::CustomizationValue.find_or_initialize_by( :name => customization_value[ :name ] ).tap do | o |
+    o.assign_attributes( customization_value )
     o.save
   end
 end
@@ -229,8 +296,54 @@ rock_option_types.each do | option_type |
   option_value_ids_by_type << option_type.option_values.pluck( :id )
 end
 
-ap option_value_ids_by_type
-
 rock_products.each do | product |
   match_ids( option_value_ids_by_type, 0, [  ], product )
+end
+
+puts 'Creating CustomizationVariants...'
+
+Spree::Variant.all.each do | variant |
+  next if variant.option_value_variants.empty?
+  
+  size = variant.option_values
+    .find_by( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).name
+  image = variant.option_values
+    .find_by( :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id ).name
+  i = 1
+    
+  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'font' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+  i = i + 1
+  
+  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-1' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+  i = i + 1
+  
+  if image == 'None'
+    Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-2' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+    i = i + 1
+  
+    if [ 'Medium', 'Large', 'Extra Large' ].include?( size )
+      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-3' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+      i = i + 1
+    end
+
+    if [ 'Large', 'Extra Large' ].include?( size )
+      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-4' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+      i = i + 1
+    end
+  else
+    if [ 'Medium', 'Large', 'Extra Large' ].include?( size )
+      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-2' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+      i = i + 1
+    end
+
+    if [ 'Large', 'Extra Large' ].include?( size )
+      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-3' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+      i = i + 1
+    end
+    
+    Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'catalog-artwork' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+      i = i + 1
+  end 
+  
+  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'notes' ).id, :variant_id => variant.id ).update_attributes( :position => i )
 end
