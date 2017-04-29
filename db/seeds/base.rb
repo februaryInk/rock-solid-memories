@@ -49,6 +49,23 @@ def self.rock_size_value_prices
   }
 end
 
+puts 'Updating Store...'
+
+Spree::Store.first_or_initialize(  ).tap do | o |
+  o.assign_attributes(
+    :code => 'rsm',
+    :default => true,
+    :default_currency => 'USD',
+    :mail_from_address => 'rocksolidmemories@gmail.com',
+    :meta_description => 'A stone engraving business.',
+    :meta_keywords => 'stone rock engraving menories',
+    :name => 'Rock Solid Memories',
+    :seo_title => 'Rock Solid Memories',
+    :url => 'http://rocksolidmemories.com'
+  )
+  o.save
+end
+
 puts 'Creating ShippingCategories...'
 
 shipping_categories = [

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   
   get '/sitemap.xml' => 'sitemaps#index', :format => 'xml', :as => 'sitemap'
   
-  root :to => 'base_pages#home'
+  get '/home' => 'base_pages#home'
   
   match '*path' => redirect( '/' ), :via => [ :get, :post ]
 end
