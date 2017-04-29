@@ -105,25 +105,25 @@ option_values = [
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'Small',
     :position => 1,
-    :presentation => 'Small'
+    :presentation => 'Small (4"-6")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'Medium',
     :position => 2,
-    :presentation => 'Medium'
+    :presentation => 'Medium (6"-9")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'Large',
     :position => 3,
-    :presentation => 'Large'
+    :presentation => 'Large (9"-12")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'Extra Large',
     :position => 4,
-    :presentation => 'Extra Large'
+    :presentation => 'Extra Large (12"-16")'
   }
 ]
 
@@ -226,38 +226,61 @@ end
 
 puts 'Creating Products...'
 
-types = [
-  'Engraved Stone (General)',
-  'Address Marker',
-  'Business Sign',
-  'Event Keepsake',
-  'Family Stone',
-  'Garden Stone',
-  'In Memory Of',
-  'Pet Memorial',
-  'Welcome Stone'
-]
-
 products = [
   {
     :available_on => 1.day.ago,
-    :description => 'If none of our specific engraved stond categories suite your needs, use this general category to order what you need.',
+    :description => 'If none of our specific engraved stond categories suite your needs, use this general category.',
     :name => 'Engraved Stone (General)',
-    :price => 45.00,
+    :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'Display your home\'s address.',
-    :name => 'Address Marker',
-    :price => 45.00,
+    :description => 'Display your family\'s name.',
+    :name => 'Family Stone',
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'Set the mood for your garden or landscaping.',
+    :name => 'Garden Stone',
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'In rememberance.',
+    :name => 'Memorial',
+    :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
     :description => 'In rememberance of a beloved pet.',
     :name => 'Pet Memorial',
-    :price => 45.00,
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'For big events like weddings, anniversaries, and birthdays.',
+    :name => 'Special Ocassion Keepsake',
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'A flat paving stone for walkways.',
+    :name => 'Stepping Stone',
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'Greet your guests.',
+    :name => 'Welcome Sign',
+    :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   }
 ]
