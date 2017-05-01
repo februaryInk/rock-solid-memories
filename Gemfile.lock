@@ -375,6 +375,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rvm
   capistrano3-puma
+  carmen
   coffee-script
   dotenv-rails
   font-awesome-rails

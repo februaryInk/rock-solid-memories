@@ -9,6 +9,8 @@ gem 'autoprefixer-rails'
 # Pretty print structures in the console using `ap`.
 gem 'awesome_print'
 
+gem 'carmen'
+
 gem 'coffee-script'
 
 # Load environment variables from .env.
