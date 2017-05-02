@@ -90,11 +90,37 @@ namespace :deploy do
       invoke 'puma:restart'
     end
   end
+  
+  desc 'Reload the database with seed data'
+  task :seed => [:set_rails_env] do
+    on primary fetch(:migration_role) do
+      within release_path do
+        with rails_env: fetch(:rails_env) do
+          execute :rake, "db:seed"
+        end
+      end
+    end
+  end
 
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+end
+
+namespace :rails do
+  desc "Run the console on a remote server."
+  task :console do
+    on roles(:app) do |h|
+      execute_interactively "RAILS_ENV=#{fetch(:rails_env)} bundle exec rails console", h.user
+    end
+  end
+
+  def execute_interactively(command, user)
+    info "Connecting with #{user}@#{host}"
+    cmd = "ssh #{user}@#{host} -p 22 -t 'cd #{fetch(:deploy_to)}/current && #{command}'"
+    exec cmd
+  end
 end
 
 # ps aux | grep puma    # Get puma pid

@@ -40,10 +40,6 @@ gem 'puma'
 # Use SCSS for stylesheets.
 gem 'sass-rails', '~> 5.0'
 
-gem 'spree', :path => '/home/farrah/Rails/spree_custom/', :branch => '3-2-stable-custom'
-gem 'spree_auth_devise', '~> 3.2.0.beta'
-gem 'spree_gateway', '~> 3.2.0.beta'
-
 # Make navigating the application faster.
 gem 'turbolinks', '~> 5.x'
 
@@ -54,6 +50,10 @@ source 'https://rails-assets.org' do
   # Import the lightweight Unsemantic CSS grid.
   gem 'rails-assets-unsemantic'
 end
+
+gem 'spree', :git => 'git://github.com/februaryInk/spree.git', :branch => '3-2-stable-custom'
+gem 'spree_auth_devise', '~> 3.2.0.beta'
+gem 'spree_gateway', '~> 3.2.0.beta'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console.
@@ -68,7 +68,7 @@ group :development do
   gem 'web-console'
   
   # Handle automated deployment with Capistrano.
-  gem 'capistrano', :require => false
+  gem 'capistrano', '3.8.0', :require => false
   gem 'capistrano-bundler', :require => false
   gem 'capistrano-rails', :require => false
   gem 'capistrano-rvm', :require => false

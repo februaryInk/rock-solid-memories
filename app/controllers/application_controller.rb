@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   private
     
     def lockout
-      render 'shared/lockout', :layout => 'simple' if ENV[ 'LOCKOUT' ].to_s == 'true'
+      # render 'shared/lockout', :layout => 'simple' if ENV[ 'LOCKOUT' ].to_s == 'true'
     end
 end

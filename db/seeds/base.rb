@@ -134,7 +134,7 @@ shipping_methods.each do | shipping_method |
     
     o.calculator.update_attributes(
       :preferences => {
-        :flat_percent => 20.0
+        :flat_percent => 25.0
       }
     )
   end
@@ -402,9 +402,10 @@ end
 puts 'Creating CustomizatonValues...'
 
 font_names = [
-  'Arial',
-  'Georgia',
-  'Tahoma'
+  'Brush',
+  'Handwriting',
+  'Modern',
+  'Typewriter'
 ]
 
 customization_values = [  ]
@@ -488,7 +489,7 @@ products = [
   {
     :available_on => 1.day.ago,
     :description => 'For big events like weddings, anniversaries, and birthdays.',
-    :name => 'Special Ocassion Keepsake',
+    :name => 'Special Occasion Keepsake',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
