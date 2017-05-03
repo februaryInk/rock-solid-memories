@@ -49,8 +49,8 @@ set :rvm_ruby_version, '2.4.0'
 set :keep_releases, 3
 
 ## Linked Files & Directories (Default None):
-set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_files, %w{.env .env.production config/database.yml}
+set :linked_dirs,  fetch(:linked_dirs, []).push('public/system')
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
