@@ -76,13 +76,13 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
-    address:              'smtp.sendgrid.net',
+    address:              'smtp.gmail.com',
     authentication:       :plain,
-    domain:               'heroku.com',
+    domain:               'www.rocksolidmemories.com',
     enable_starttls_auto: true,
-    password:             ENV[ 'SENDGRID_PASSWORD' ],
+    password:             ENV['GMAIL_PASSWORD'],
     port:                 587,
-    user_name:            ENV[ 'SENDGRID_USERNAME' ]
+    user_name:            ENV['GMAIL_USERNAME']
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

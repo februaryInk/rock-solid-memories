@@ -3,6 +3,8 @@ class EmailsController < ApplicationController
   def create
     @email = Email.new(email_params)
     
+    puts ENV['GMAIL_USERNAME']
+    
     if @email.valid?
       mail = AdminMailer.contact_us(@email)
       mail.deliver_now
