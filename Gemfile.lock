@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/februaryInk/spree.git
-  revision: 23a04aca07ca1a95f892db03e21b97882a9adc37
+  revision: 1bb462e1ec7ce9c60ade6a5f31eb1f5c25b77bd2
   branch: 3-2-stable-custom
   specs:
     spree (3.2.1)
@@ -86,8 +86,8 @@ GEM
     activejob (5.0.1)
       activesupport (= 5.0.1)
       globalid (>= 0.3.6)
-    activemerchant (1.65.0)
-      activesupport (>= 3.2.14, < 5.1)
+    activemerchant (1.66.0)
+      activesupport (>= 3.2.14, < 6.x)
       builder (>= 2.1.2, < 4.0.0)
       i18n (>= 0.6.9)
       nokogiri (~> 1.4)
