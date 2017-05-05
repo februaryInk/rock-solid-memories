@@ -50,7 +50,7 @@ set :keep_releases, 3
 
 ## Linked Files & Directories (Default None):
 set :linked_files, %w{.env .env.production config/database.yml}
-set :linked_dirs,  fetch(:linked_dirs, []).push('public/system')
+set :linked_dirs,  fetch(:linked_dirs, []).push('public/system').push('public/spree')
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
