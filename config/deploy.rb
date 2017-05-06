@@ -90,6 +90,20 @@ namespace :deploy do
       invoke 'puma:restart'
     end
   end
+
+  desc 'Start application'
+  task :start do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:start'
+    end
+  end
+
+  desc 'Stop application'
+  task :stop do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:stop'
+    end
+  end
   
   desc 'Reload the database with seed data'
   task :seed => [:set_rails_env] do
