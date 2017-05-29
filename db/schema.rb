@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421014142) do
+ActiveRecord::Schema.define(version: 20170528175401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,24 @@ ActiveRecord::Schema.define(version: 20170421014142) do
     t.index ["source_id", "source_type"], name: "index_spree_adjustments_on_source_id_and_source_type", using: :btree
   end
 
+  create_table "spree_artwork_collections", force: :cascade do |t|
+    t.integer  "artwork_id"
+    t.integer  "collection_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["artwork_id"], name: "index_spree_artwork_collections_on_artwork_id", using: :btree
+    t.index ["collection_id"], name: "index_spree_artwork_collections_on_collection_id", using: :btree
+  end
+
+  create_table "spree_artworks", force: :cascade do |t|
+    t.integer  "complexity"
+    t.string   "code"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "source"
+  end
+
   create_table "spree_assets", force: :cascade do |t|
     t.string   "viewable_type"
     t.integer  "viewable_id"
@@ -100,6 +118,13 @@ ActiveRecord::Schema.define(version: 20170421014142) do
     t.index ["calculable_id", "calculable_type"], name: "index_spree_calculators_on_calculable_id_and_calculable_type", using: :btree
     t.index ["deleted_at"], name: "index_spree_calculators_on_deleted_at", using: :btree
     t.index ["id", "type"], name: "index_spree_calculators_on_id_and_type", using: :btree
+  end
+
+  create_table "spree_collections", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "spree_countries", force: :cascade do |t|
@@ -1066,6 +1091,8 @@ ActiveRecord::Schema.define(version: 20170421014142) do
     t.index ["kind"], name: "index_spree_zones_on_kind", using: :btree
   end
 
+  add_foreign_key "spree_artwork_collections", "spree_artworks", column: "artwork_id"
+  add_foreign_key "spree_artwork_collections", "spree_collections", column: "collection_id"
   add_foreign_key "spree_customization_values", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_variants", column: "variant_id"
