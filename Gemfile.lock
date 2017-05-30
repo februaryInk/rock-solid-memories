@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/februaryInk/spree.git
-  revision: fdf3b3b1bc27572285a696e6596af65a483bae09
+  revision: 6827528f4e1ccdff2d69a6080c5ef2548e6d52a7
   branch: 3-2-stable-custom
   specs:
     spree (3.2.1)
@@ -148,7 +148,7 @@ GEM
     carmen (1.0.2)
       activesupport (>= 3.0.0)
     cldr-plurals-runtime-rb (1.0.1)
-    climate_control (0.1.0)
+    climate_control (0.2.0)
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     coffee-script (2.4.1)
@@ -224,8 +224,8 @@ GEM
     mimemagic (0.3.0)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
-    monetize (1.6.0)
-      money (~> 6.8)
+    monetize (1.7.0)
+      money (~> 6.9)
     money (6.9.0)
       i18n (>= 0.6.4, < 0.9)
     net-scp (1.2.1)
