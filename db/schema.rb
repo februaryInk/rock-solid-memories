@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528175401) do
+ActiveRecord::Schema.define(version: 20170609174418) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,16 @@ ActiveRecord::Schema.define(version: 20170528175401) do
     t.datetime "updated_at",    null: false
     t.index ["artwork_id"], name: "index_spree_artwork_collections_on_artwork_id", using: :btree
     t.index ["collection_id"], name: "index_spree_artwork_collections_on_collection_id", using: :btree
+  end
+
+  create_table "spree_artwork_line_items", force: :cascade do |t|
+    t.integer  "artwork_id"
+    t.integer  "line_item_id"
+    t.integer  "number_of_uses", default: 1
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["artwork_id"], name: "index_spree_artwork_line_items_on_artwork_id", using: :btree
+    t.index ["line_item_id"], name: "index_spree_artwork_line_items_on_line_item_id", using: :btree
   end
 
   create_table "spree_artworks", force: :cascade do |t|
@@ -1093,6 +1103,8 @@ ActiveRecord::Schema.define(version: 20170528175401) do
 
   add_foreign_key "spree_artwork_collections", "spree_artworks", column: "artwork_id"
   add_foreign_key "spree_artwork_collections", "spree_collections", column: "collection_id"
+  add_foreign_key "spree_artwork_line_items", "spree_artworks", column: "artwork_id"
+  add_foreign_key "spree_artwork_line_items", "spree_line_items", column: "line_item_id"
   add_foreign_key "spree_customization_values", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_variants", column: "variant_id"

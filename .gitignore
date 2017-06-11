@@ -4,6 +4,7 @@
 # Database config file.
 # Rails documentation files.
 # Log files.
+# Spree image uploads.
 # Project-related storage.
 # Temp files.
 
@@ -13,6 +14,7 @@
 /config/database.yml
 /doc/
 /log/*.log
+/public/spree/
 /storage
 /tmp
 
