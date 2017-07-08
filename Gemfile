@@ -51,7 +51,6 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-unsemantic'
 end
 
-# gem 'spree', :path => '/home/farrah/Rails/spree_custom/', :branch => '3-2-stable-custom'
 gem 'spree', :git => 'git://github.com/februaryInk/spree.git', :branch => '3-2-stable-custom'
 gem 'spree_auth_devise', '~> 3.2.0.beta'
 gem 'spree_gateway', '~> 3.2.0.beta'
@@ -59,7 +58,7 @@ gem 'spree_gateway', '~> 3.2.0.beta'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console.
   gem 'byebug', :platform => :mri
-  
+
   # Listen to file modifications.
   gem 'listen', '~> 3.0.5'
 end
@@ -67,7 +66,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'
-  
+
   # Handle automated deployment with Capistrano.
   gem 'capistrano', '3.8.0', :require => false
   gem 'capistrano-bundler', :require => false
