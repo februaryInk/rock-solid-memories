@@ -15,8 +15,10 @@ rock_option_types = [  ]
 
 option_types.each do | option_type |
   rock_option_types << Spree::OptionType.find_or_initialize_by( :name => option_type[ :name ] ).tap do | o |
-    o.assign_attributes( option_type )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( option_type )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -65,8 +67,10 @@ rock_option_values = [  ]
 
 option_values.each do | option_value |
   rock_option_values << Spree::OptionValue.find_or_initialize_by( :name => option_value[ :name ] ).tap do | o |
-    o.assign_attributes( option_value )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( option_value )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -112,8 +116,10 @@ customizations = [
 
 customizations.each do |customization|
   Spree::Customization.find_or_initialize_by( :name => customization[ :name ] ).tap do | o |
-    o.assign_attributes( customization )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( customization )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -139,8 +145,10 @@ end
 
 customization_values.each do | customization_value |
   Spree::CustomizationValue.find_or_initialize_by( :name => customization_value[ :name ] ).tap do | o |
-    o.assign_attributes( customization_value )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( customization_value )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -154,8 +162,10 @@ prototypes = [
 
 prototypes.each do | prototype |
   Spree::Prototype.find_or_initialize_by( :name => prototype[ :name ] ).tap do | o |
-    o.assign_attributes( prototype )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( prototype )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -231,8 +241,10 @@ rock_products = [  ]
 
 products.each do | product |
   rock_products << Spree::Product.find_or_initialize_by( :name => product[ :name ] ).tap do | o |
-    o.assign_attributes( product )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( product )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -241,14 +253,16 @@ puts 'Creating OptionTypeProducts...'
 rock_products.each do | product |
   rock_option_types.each_with_index do | option_type, i |
     Spree::ProductOptionType.find_or_initialize_by( :option_type_id => option_type.id, :product_id => product.id ).tap do | o |
-      o.assign_attributes(
-        {
-	      :option_type_id => option_type.id,
-		  :position => i,
-		  :product_id => product.id,
-        }
-      )
-      o.save
+      if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+        o.assign_attributes(
+          {
+    	      :option_type_id => option_type.id,
+    		    :position => i,
+    		    :product_id => product.id,
+          }
+        )
+        write_or_overwrite( o )
+      end
     end
   end
 end

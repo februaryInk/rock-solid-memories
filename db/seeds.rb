@@ -14,6 +14,10 @@ def self.load_if_exists( file_path )
   end
 end
 
+def self.yes?( input )
+  [ 'Y', 'y', 'Yes', 'yes' ].include?( input )
+end
+
 if ENV[ 'SEED_SPREE' ]
   begin
     Spree::Core::Engine.load_seed if defined?(Spree::Core)
@@ -23,6 +27,32 @@ if ENV[ 'SEED_SPREE' ]
   end
 end
 
-# Allow separate files for test, development, and production seeds by loading
-# one file in accordance with the current environment.
-load_if_exists( Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb" ) )
+# Initialize variables with safe settings.
+$write = false
+$require_write_permission = true
+$overwrite = false
+$require_overwrite_permission = true
+
+puts 'Database seeding initiated.'
+
+puts 'Do you want to seed any new records that aren\'t in the database already? (y/n)'
+$write = yes?( STDIN.gets.chomp )
+
+if $write
+  puts 'If the record being seeded is new, do you want to be asked permission before it is saved to the database? (y/n)'
+  $require_write_permission = yes?( STDIN.gets.chomp )
+end
+
+puts 'Do you want to overwrite any records that are in the database already? (y/n)'
+$overwrite = yes?( STDIN.gets.chomp )
+
+if $overwrite
+  puts 'If the record being seeded is NOT new, do you want to be asked permission before the record currently in the database is overwritten? (y/n)'
+  $require_overwrite_permission = yes?( STDIN.gets.chomp )
+end
+
+if $write || $overwrite
+  # Allow separate files for test, development, and production seeds by loading
+  # one file in accordance with the current environment.
+  load_if_exists( Rails.root.join( 'db', 'seeds', "#{Rails.env.downcase}.rb" ) )
+end

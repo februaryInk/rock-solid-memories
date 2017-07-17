@@ -3,42 +3,44 @@ puts 'Creating Collections...'
 collections = [
   {
     :name => 'Animals',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Decorations and Flourishes',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Flora',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Oceans, Lakes, and Rivers',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Pets',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Stylized Words and Letters',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Travel',
-    :description => '' 
+    :description => ''
   },
   {
     :name => 'Wildlife',
-    :description => '' 
+    :description => ''
   }
 ]
 
 collections.each do |collection|
-  Spree::Collection.find_or_initialize_by( :name => collection[ :name ] ).tap do |o|
-    o.assign_attributes( collection )
-    o.save
+  Spree::Collection.find_or_initialize_by( :name => collection[ :name ] ).tap do | o |
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( collection )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -100,20 +102,6 @@ artworks = [
     :complexity => 2,
     :description => 'A simple silhouette of a sitting cat.',
     :source => 'The Noun Project'
-  },
-  {
-    :code => 'CATPAW1',
-    :collection_ids => Spree::Collection.where( :name => [ 'Animals', 'Pets' ] ).pluck( :id ),
-    :complexity => 2,
-    :description => 'Two cat paw prints, side-by-side.',
-    :source => 'The Noun Project'
-  },
-  {
-    :code => 'CATPAW2',
-    :collection_ids => Spree::Collection.where( :name => [ 'Animals', 'Pets' ] ).pluck( :id ),
-    :complexity => 3,
-    :description => 'A cat paw print with angel wings.',
-    :source => 'The Noun Project, modified by Farrah Brink'
   },
   {
     :code => 'COMPASS1',
@@ -524,23 +512,25 @@ artworks = [
 ]
 
 artworks.each do |artwork|
-  Spree::Artwork.find_or_initialize_by( :code => artwork[ :code ] ).tap do |o|
-    begin
-      file_path = "#{Rails.root}/db/seeds/galleries/artworks/#{artwork[ :code ]}.jpg"
-      file = File.new( file_path )
-      
-      artwork.merge!( 
-        { 
-          :image_attributes => {
-            :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => file, :filename => File.basename( file ), :type => MIME::Types.type_for( file_path ).first.content_type )
+  Spree::Artwork.find_or_initialize_by( :code => artwork[ :code ] ).tap do | o |
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      begin
+        file_path = "#{Rails.root}/db/seeds/galleries/artworks/#{artwork[ :code ]}.jpg"
+        file = File.new( file_path )
+
+        artwork.merge!(
+          {
+            :image_attributes => {
+              :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => file, :filename => File.basename( file ), :type => MIME::Types.type_for( file_path ).first.content_type )
+            }
           }
-        }
-      )
-      
-      o.assign_attributes( artwork )
-      o.save
-    rescue StandardError => e
-      puts e
+        )
+
+        o.assign_attributes( artwork )
+        write_or_overwrite( o )
+      rescue StandardError => e
+        puts e
+      end
     end
   end
 end

@@ -1,24 +1,43 @@
 puts 'Updating Store...'
 
 Spree::Store.first_or_initialize(  ).tap do | o |
-  o.assign_attributes(
-    :code => 'rsm',
-    :default => true,
-    :default_currency => 'USD',
-    :mail_from_address => 'rocksolidmemories@gmail.com',
-    :meta_description => 'A stone engraving business.',
-    :meta_keywords => 'stone rock engraving menories',
-    :name => 'Rock Solid Memories',
-    :seo_title => 'Rock Solid Memories',
-    :url => 'http://rocksolidmemories.com'
-  )
-  o.save
+  if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+    o.assign_attributes(
+      :code => 'rsm',
+      :default => true,
+      :default_currency => 'USD',
+      :mail_from_address => 'rocksolidmemories@gmail.com',
+      :meta_description => 'A stone engraving business.',
+      :meta_keywords => 'stone rock engraving menories',
+      :name => 'Rock Solid Memories',
+      :seo_title => 'Rock Solid Memories',
+      :url => 'http://rocksolidmemories.com'
+    )
+
+    write_or_overwrite( o )
+  end
 end
+
+
 
 puts 'Creating Roles...'
 
-Spree::Role.where( :name => 'admin' ).first_or_create
-Spree::Role.where( :name => 'user' ).first_or_create
+roles = [
+  {
+    :name => 'admin'
+  },
+  {
+    :name => 'user'
+  }
+]
+
+roles.each do | role |
+  Spree::Role.find_or_initialize_by( :name => role[ :name ] ).tap do | o |
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      write_or_overwrite( o )
+    end
+  end
+end
 
 puts 'Creating Users...'
 
@@ -32,13 +51,16 @@ users = [
 
 users.each do | user |
   Spree::User.find_or_initialize_by( :email => user[ :email ] ).tap do | o |
-    o.assign_attributes( user )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( user )
 
-    Spree::RoleUser.find_or_create_by(
-      :role_id => Spree::Role.find_by( :name => 'admin' ).id,
-      :user_id => o.id
-    )
+      if write_or_overwrite( o )
+        Spree::RoleUser.find_or_create_by(
+          :role_id => Spree::Role.find_by( :name => 'admin' ).id,
+          :user_id => o.id
+        )
+      end
+    end
   end
 end
 
@@ -66,7 +88,9 @@ payment_methods = [
 
 payment_methods.each do | payment_method |
   Spree::PaymentMethod.find_or_initialize_by( :name => payment_method[ :name ] ).tap do | o |
-    o.assign_attributes( payment_method )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( payment_method )
+      write_or_overwrite( o )
+    end
   end
 end

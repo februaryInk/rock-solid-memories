@@ -8,8 +8,10 @@ shipping_categories = [
 
 shipping_categories.each do | shipping_category |
   Spree::ShippingCategory.find_or_initialize_by( :name => shipping_category[ :name ] ).tap do | o |
-    o.assign_attributes( shipping_category )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( shipping_category )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -30,16 +32,17 @@ shipping_methods = [
 
 shipping_methods.each do | shipping_method |
   Spree::ShippingMethod.find_or_initialize_by( :admin_name => shipping_method[ :admin_name ] ).tap do | o |
-    o.assign_attributes( shipping_method )
-    o.valid?
-    ap o.errors.messages
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( shipping_method )
 
-    o.calculator.update_attributes(
-      :preferences => {
-        :flat_percent => 25.0
-      }
-    )
+      if write_or_overwrite( o )
+        o.calculator.update_attributes(
+          :preferences => {
+            :flat_percent => 25.0
+          }
+        )
+      end
+    end
   end
 end
 
@@ -59,8 +62,10 @@ countries = [
 
 countries.each do | country |
   Spree::Country.find_or_initialize_by( :name => country[ :name ] ).tap do | o |
-    o.assign_attributes( country )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( country )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -109,8 +114,10 @@ zones = [
 
 zones.each do | zone |
   Spree::Zone.find_or_initialize_by( :name => zone[ :name ] ).tap do | o |
-    o.assign_attributes( zone )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( zone )
+      write_or_overwrite( o )
+    end
   end
 end
 
@@ -149,7 +156,9 @@ stock_locations = [
 
 stock_locations.each do | stock_location |
   Spree::StockLocation.find_or_initialize_by( :name => stock_location[ :name ] ).tap do | o |
-    o.assign_attributes( stock_location )
-    o.save
+    if ( $write && o.new_record? ) || ( $overwrite && !o.new_record? )
+      o.assign_attributes( stock_location )
+      write_or_overwrite( o )
+    end
   end
 end

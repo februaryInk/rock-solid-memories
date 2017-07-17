@@ -50,3 +50,39 @@ def self.rock_size_value_prices
     'Extra Large' => 75.00
   }
 end
+
+def self.write_or_overwrite( record )
+  if record.new_record? && $require_write_permission
+    puts "There is a new #{record.class.name} record: "
+    ap record
+    puts 'Would you like to save this record to the database? (y/n)'
+    if yes?( STDIN.gets.chomp )
+      puts 'Saving...'
+      o.save
+      puts 'Record has been saved.'
+      return true
+    else
+      puts 'The record was not saved.'
+      return false
+    end
+  elsif !record.new_record? && $require_overwrite_permission
+    if record.changed?
+      puts "There is a matching #{record.class.name} record already in the database. The following attributes will be changed if it is overwritten: "
+      ap record.changes
+      puts 'Would you like to overwrite the record in the database? (y/n)'
+      if yes?( STDIN.gets.chomp )
+        puts 'Saving...'
+        record.save
+        puts 'The record has been saved.'
+        return true
+      else
+        puts 'The record was not saved.'
+        return false
+      end
+    else
+      return true
+    end
+  else
+    record.save
+  end
+end
