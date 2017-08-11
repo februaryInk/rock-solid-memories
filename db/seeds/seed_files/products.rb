@@ -2,10 +2,6 @@ puts 'Creating Option Types...'
 
 option_types = [
   {
-    :name => 'rock-image-type',
-    :presentation => 'Image Type'
-  },
-  {
     :name => 'rock-size',
     :presentation => 'Size'
   }
@@ -26,38 +22,26 @@ puts 'Creating Option Values...'
 
 option_values = [
   {
-    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id,
-    :name => 'None',
-    :position => 1,
-    :presentation => 'None'
-  },
-  {
-    :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id,
-    :name => 'Catalog',
-    :position => 2,
-    :presentation => 'Catalog'
-  },
-  {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
-    :name => 'Small',
+    :name => 'small',
     :position => 1,
     :presentation => 'Small (4"-6")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
-    :name => 'Medium',
+    :name => 'medium',
     :position => 2,
     :presentation => 'Medium (6"-9")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
-    :name => 'Large',
+    :name => 'large',
     :position => 3,
     :presentation => 'Large (9"-12")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
-    :name => 'Extra Large',
+    :name => 'extra-large',
     :position => 4,
     :presentation => 'Extra Large (12"-16")'
   }
@@ -81,11 +65,6 @@ customizations = [
     :name => 'font',
     :presentation => 'Font',
     :value_type => 'select'
-  },
-  {
-    :name => 'catalog-artwork',
-    :presentation => 'Image Catalog Code',
-    :value_type => 'string'
   },
   {
     :name => 'text-line-1',
@@ -282,47 +261,51 @@ end
 puts 'Creating CustomizationVariants...'
 
 Spree::Variant.all.each do | variant |
-  next if variant.option_value_variants.empty?
-
-  size = variant.option_values
-    .find_by( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).name
-  image = variant.option_values
-    .find_by( :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id ).name
-  i = 1
-
-  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'font' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-  i = i + 1
-
-  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-1' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-  i = i + 1
-
-  if image == 'None'
-    Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-2' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-    i = i + 1
-
-    if [ 'Medium', 'Large', 'Extra Large' ].include?( size )
-      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-3' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-      i = i + 1
-    end
-
-    if [ 'Large', 'Extra Large' ].include?( size )
-      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-4' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-      i = i + 1
-    end
+  if variant.is_master?
+    customizations = Spree::Customization.all
   else
-    if [ 'Medium', 'Large', 'Extra Large' ].include?( size )
-      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-2' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-      i = i + 1
-    end
+    size = variant.option_values.find_by( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).name
 
-    if [ 'Large', 'Extra Large' ].include?( size )
-      Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'text-line-3' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-      i = i + 1
-    end
+    customizations_for_size = {
+      'small' => [
+        'font',
+        'text-line-1',
+        'text-line-2',
+        'notes'
+      ],
+      'medium' => [
+        'font',
+        'text-line-1',
+        'text-line-2',
+        'text-line-3',
+        'notes'
+      ],
+      'large' => [
+        'font',
+        'text-line-1',
+        'text-line-2',
+        'text-line-3',
+        'text-line-4',
+        'notes'
+      ],
+      'extra-large' => [
+        'font',
+        'text-line-1',
+        'text-line-2',
+        'text-line-3',
+        'text-line-4',
+        'notes'
+      ]
+    }
 
-    Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'catalog-artwork' ).id, :variant_id => variant.id ).update_attributes( :position => i )
-      i = i + 1
+    ap customizations_for_size[ size ]
+    customizations = Spree::Customization.where( :name => customizations_for_size[ size ] )
   end
 
-  Spree::CustomizationVariant.find_or_initialize_by( :customization_id => Spree::Customization.find_by( :name => 'notes' ).id, :variant_id => variant.id ).update_attributes( :position => i )
+  i = 1
+
+  customizations.each do | customization |
+    Spree::CustomizationVariant.find_or_initialize_by( :customization_id => customization.id, :variant_id => variant.id ).update_attributes( :position => i )
+    i = i + 1
+  end
 end

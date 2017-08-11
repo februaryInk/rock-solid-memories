@@ -10,17 +10,22 @@ def self.match_ids( id_set, i, matched_ids, product )
         o.assign_attributes(
           :option_values => Spree::OptionValue.find( matched_set ),
           :sku => ( [ product.id ] + matched_set ).join( '-' ),
-          :track_inventory => false,
-          :weight => 20.0
+          :track_inventory => false
+        )
+        o.save
+
+        size_option_value = o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).first
+
+        o.assign_attributes(
+          :weight => size_option_value ? rock_size_value_weights[ size_option_value.name ] : 30.00
         )
         o.save
 
         Spree::Price.find_or_initialize_by( :variant_id => o.id ).tap do | p |
           p.assign_attributes(
-            :amount => [
+            :amount => !size_option_value ? product.master.price : [
               product.master.price,
-              rock_image_value_prices[ o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-image-type' ).id ).first.name ],
-              rock_size_value_prices[ o.option_values.where( :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id ).first.name ]
+              rock_size_value_prices[ size_option_value.name ]
             ].sum,
             :currency => 'USD'
           )
@@ -35,19 +40,21 @@ def self.product_variants_with_option_values( option_value_ids, product_id )
   Spree::Variant.joins( :option_value_variants ).where( :product_id => product_id ).where( ( [ 'spree_variants.id IN ( SELECT variant_id FROM spree_option_value_variants WHERE option_value_id = ? )' ] * option_value_ids.count ).join( ' AND ' ), *option_value_ids )
 end
 
-def self.rock_image_value_prices
+def self.rock_size_value_prices
   {
-    'Catalog' => 25.00,
-    'None' => 0.00
+    'small' => 0.00,
+    'medium' => 25.00,
+    'large' => 50.00,
+    'extra-large' => 75.00
   }
 end
 
-def self.rock_size_value_prices
+def self.rock_size_value_weights
   {
-    'Small' => 0.00,
-    'Medium' => 25.00,
-    'Large' => 50.00,
-    'Extra Large' => 75.00
+    'small' => 15.00,
+    'medium' => 25.00,
+    'large' => 40.00,
+    'extra-large' => 60.00
   }
 end
 
