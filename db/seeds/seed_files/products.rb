@@ -31,19 +31,19 @@ option_values = [
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'medium',
     :position => 2,
-    :presentation => 'Medium (6"-9")'
+    :presentation => 'Medium (7"-9")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'large',
     :position => 3,
-    :presentation => 'Large (9"-12")'
+    :presentation => 'Large (10"-12")'
   },
   {
     :option_type_id => Spree::OptionType.find_by( :name => 'rock-size' ).id,
     :name => 'extra-large',
     :position => 4,
-    :presentation => 'Extra Large (12"-16")'
+    :presentation => 'Extra Large (13"-15")'
   }
 ]
 
@@ -153,63 +153,63 @@ puts 'Creating Products...'
 products = [
   {
     :available_on => 1.day.ago,
-    :description => 'A gift for someone you appreciate.',
+    :description => 'An engraved stone makes an enduring tribute to an individual’s accomplishments and character. Perfect for Teacher Appreciation, competitions, service awards, or any occasion where you want to tell someone that they are admired for their efforts.',
     :name => 'Awards and Honors',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'If none of our specific engraved stond categories suite your needs, use this general category.',
+    :description => 'Cut stone makes for an excellent indoor or outdoor display. It can be set upright like a plaque for tabletop display (may require a support), or laid flat as a stepping stone. Our cut stone is relatively uniform in thickness, being 1” to 3” in depth.',
+    :name => 'Cut Stone',
+    :price => 35.00,
+    :shipping_category_id => Spree::ShippingCategory.first.id
+  },
+  {
+    :available_on => 1.day.ago,
+    :description => 'Though the design you have in mind does not fit neatly into any of our specific categories, we will still be happy to make it for you. Just let us know what you want, whatever it may be. If you are looking for unusual custom work that we don’t offer through our online order forms, such as on-site engraving or an extra large rock, we can do that too - just contact us and we can work with you on the details.',
     :name => 'Engraved Stone (General)',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'Set the mood for your garden or landscaping.',
+    :description => 'Set the tone in your garden (flower or otherwise) with a garden stone. These keepsakes are a great way to display a favorite quote, artwork, or words to live by.',
     :name => 'Garden Stone',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'In rememberance.',
+    :description => 'If you are looking to honor the memory of a loved one or to commemorate someone in your life, there are few methods that are as lasting as a custom engraved stone.',
     :name => 'Memorial',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'Display your family\'s name.',
+    :description => 'Personalized engraved stones have proven to be one of our most popular offerings. Set your name in stone to add a signature touch to your home. We have created personalized stones in several different forms, including as a means to display a family name, a monogram, or individual family members’ names.',
     :name => 'Personalized Stone',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'In rememberance of a beloved pet.',
+    :description => 'We know from experience how difficult it is to lose a beloved pet. A pet memorial commemorates the life of a cherished companion, no matter how big or small. We take great care in crafting these memorials with the hope that they will help to bring feelings of closure and peace during a time of grief and loss.',
     :name => 'Pet Memorial',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'For big events like weddings, anniversaries, and birthdays.',
+    :description => 'Commemorate any kind of big day, from weddings and anniversaries to graduations to birthdays, with a durable engraved keepsake stone. You can truly make it a day that will be remembered for generations to come. Given the celebratory nature, this variety of engraved rock makes an excellent gift.',
     :name => 'Special Occasion Keepsake',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
   },
   {
     :available_on => 1.day.ago,
-    :description => 'A flat paving stone for walkways.',
-    :name => 'Stepping Stone',
-    :price => 35.00,
-    :shipping_category_id => Spree::ShippingCategory.first.id
-  },
-  {
-    :available_on => 1.day.ago,
-    :description => 'Greet your guests.',
+    :description => 'Bid welcome to visitors of your home or business by displaying an engraved welcome stone. The style of the font and artwork can uniquely complement your building’s decor.',
     :name => 'Welcome Sign',
     :price => 35.00,
     :shipping_category_id => Spree::ShippingCategory.first.id
