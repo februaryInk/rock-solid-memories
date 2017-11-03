@@ -54,6 +54,7 @@ end
 gem 'spree', :git => 'git://github.com/februaryInk/spree.git', :branch => '3-2-stable-custom'
 gem 'spree_auth_devise', '~> 3.2.0.beta'
 gem 'spree_gateway', '~> 3.2.0.beta'
+gem 'spree_paypal_express', github: 'spree-contrib/better_spree_paypal_express'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console.

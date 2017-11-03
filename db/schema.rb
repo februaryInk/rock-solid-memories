@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016193715) do
+ActiveRecord::Schema.define(version: 20171103161411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -200,6 +200,15 @@ ActiveRecord::Schema.define(version: 20171016193715) do
     t.string   "value_type"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "spree_font_line_items", force: :cascade do |t|
+    t.integer  "font_id"
+    t.integer  "line_item_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["font_id"], name: "index_spree_font_line_items_on_font_id", using: :btree
+    t.index ["line_item_id"], name: "index_spree_font_line_items_on_line_item_id", using: :btree
   end
 
   create_table "spree_fonts", force: :cascade do |t|
@@ -406,6 +415,18 @@ ActiveRecord::Schema.define(version: 20171016193715) do
     t.index ["order_id"], name: "index_spree_payments_on_order_id", using: :btree
     t.index ["payment_method_id"], name: "index_spree_payments_on_payment_method_id", using: :btree
     t.index ["source_id", "source_type"], name: "index_spree_payments_on_source_id_and_source_type", using: :btree
+  end
+
+  create_table "spree_paypal_express_checkouts", force: :cascade do |t|
+    t.string   "token"
+    t.string   "payer_id"
+    t.string   "transaction_id"
+    t.string   "state",                 default: "complete"
+    t.string   "refund_transaction_id"
+    t.datetime "refunded_at"
+    t.string   "refund_type"
+    t.datetime "created_at"
+    t.index ["transaction_id"], name: "index_spree_paypal_express_checkouts_on_transaction_id", using: :btree
   end
 
   create_table "spree_preferences", force: :cascade do |t|
@@ -1115,4 +1136,6 @@ ActiveRecord::Schema.define(version: 20171016193715) do
   add_foreign_key "spree_customization_values", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_customizations", column: "customization_id"
   add_foreign_key "spree_customization_variants", "spree_variants", column: "variant_id"
+  add_foreign_key "spree_font_line_items", "spree_fonts", column: "font_id"
+  add_foreign_key "spree_font_line_items", "spree_line_items", column: "line_item_id"
 end
