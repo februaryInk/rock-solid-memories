@@ -534,3 +534,87 @@ artworks.each do |artwork|
     end
   end
 end
+
+puts 'Creating Fonts...'
+
+fonts = [
+  {
+    :name => 'Aleo Bold',
+    :presentation => 'Aleo Bold'
+  },
+  {
+    :name => 'Arima Koshi',
+    :presentation => 'Arima Koshi'
+  },
+  {
+    :name => 'Berkshire Swash',
+    :presentation => 'Berkshire Swash'
+  },
+  {
+    :name => 'Bookman Old Style Bold',
+    :presentation => 'Bookman Old Style Bold'
+  },
+  {
+    :name => 'Copperplate Gothic Bold',
+    :presentation => 'Copperplate Gothic Bold'
+  },
+  {
+    :name => 'Germania One',
+    :presentation => 'Germania Old'
+  },
+  {
+    :name => 'Infini Bold',
+    :presentation => 'Infini Bold'
+  },
+  {
+    :name => 'Montserrat Alternates Semi',
+    :presentation => 'Montserrat Alternates Semi'
+  },
+  {
+    :name => 'Mothproof Script',
+    :presentation => 'Mothproof Script'
+  },
+  {
+    :name => 'Nautilus Pompilius',
+    :presentation => 'Nautilus Pompilius'
+  },
+  {
+    :name => 'Script MT Bold',
+    :presentation => 'Script MT Bold'
+  }
+]
+
+fonts.each do |font|
+  Spree::Font.find_or_initialize_by( :name => font[ :name ] ).tap do | o |
+    begin
+      file_path = "#{Rails.root}/db/seeds/galleries/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}-preview.jpg"
+      file = File.new( file_path )
+
+      font.merge!(
+        {
+          :preview_image_attributes => {
+            :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => file, :filename => File.basename( file ), :type => MIME::Types.type_for( file_path ).first.content_type ),
+            :position => 1
+          }
+        }
+      )
+
+      file_path = "#{Rails.root}/db/seeds/galleries/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}.jpg"
+      file = File.new( file_path )
+
+      font.merge!(
+        {
+          :image_attributes => {
+            :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => file, :filename => File.basename( file ), :type => MIME::Types.type_for( file_path ).first.content_type ),
+            :position => 2
+          }
+        }
+      )
+
+      o.assign_attributes( font )
+      o.save
+    rescue StandardError => e
+      puts e
+    end
+  end
+end
