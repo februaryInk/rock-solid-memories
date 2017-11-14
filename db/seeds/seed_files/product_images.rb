@@ -1,6 +1,6 @@
 puts 'Creating Images for products...'
 
-file_paths = Dir.glob( "#{Rails.root}/db/seeds/product_images/**/*.jpg" )
+file_paths = Dir.glob( "#{Rails.root}/db/seeds/images/products/**/*.jpg" )
 
 # broken method long-term. what will i do when i need to specify variants?
 file_paths.each do | file_path |

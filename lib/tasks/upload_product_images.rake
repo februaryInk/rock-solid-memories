@@ -1,4 +1,4 @@
-desc 'Upload any product images in `db/seeds/product_images`.'
+desc 'Upload any product images in `db/seeds/images/products`.'
 
 namespace :records do
   task :upload_product_images => :environment do
