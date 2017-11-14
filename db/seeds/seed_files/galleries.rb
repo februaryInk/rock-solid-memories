@@ -587,13 +587,13 @@ fonts = [
 fonts.each do |font|
   Spree::Font.find_or_initialize_by( :name => font[ :name ] ).tap do | o |
     begin
-      file_path = "#{Rails.root}/db/seeds/galleries/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}-preview.jpg"
-      file = File.new( file_path )
+      preview_file_path = "#{Rails.root}/db/seeds/galleries/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}-preview.jpg"
+      preview_file = File.new( preview_file_path )
 
       font.merge!(
         {
           :preview_image_attributes => {
-            :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => file, :filename => File.basename( file ), :type => MIME::Types.type_for( file_path ).first.content_type ),
+            :attachment => ActionDispatch::Http::UploadedFile.new( :tempfile => preview_file, :filename => File.basename( preview_file ), :type => MIME::Types.type_for( preview_file_path ).first.content_type ),
             :position => 1
           }
         }
@@ -613,6 +613,11 @@ fonts.each do |font|
 
       o.assign_attributes( font )
       o.save
+
+      # make sure the image positions are corrent. acts_as_list is doing
+      # something unwanted.
+      o.images.find_by( attachment_file_name: File.basename( preview_file ) ).update_column( :position, 1 )
+      o.images.find_by( attachment_file_name: File.basename( file ) ).update_column( :position, 2 )
     rescue StandardError => e
       puts e
     end
