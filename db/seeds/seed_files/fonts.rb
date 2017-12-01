@@ -50,7 +50,7 @@ fonts = [
 fonts.each do |font|
   Spree::Font.find_or_initialize_by( :name => font[ :name ] ).tap do | o |
     begin
-      preview_file_path = "#{Rails.root}/db/seeds/images/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}-preview.jpg"
+      preview_file_path = "#{Rails.root}/db/seeds/images/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}-preview.png"
       preview_file = File.new( preview_file_path )
 
       font.merge!(
@@ -62,7 +62,7 @@ fonts.each do |font|
         }
       )
 
-      file_path = "#{Rails.root}/db/seeds/images/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}.jpg"
+      file_path = "#{Rails.root}/db/seeds/images/fonts/#{font[ :name ].downcase.gsub( ' ', '-' )}.png"
       file = File.new( file_path )
 
       font.merge!(
